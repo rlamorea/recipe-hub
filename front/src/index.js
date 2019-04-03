@@ -1,3 +1,4 @@
+/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "(React|App)" }] */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
