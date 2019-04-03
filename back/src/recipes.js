@@ -33,7 +33,7 @@ class Recipes {
         const recipe = await this.get(id);
         const index = this.recipes.indexOf(recipe);
         this.recipes.splice(index, 1);
-        return message;
+        return recipe;
     }
 }
 
