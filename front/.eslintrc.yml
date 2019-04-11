@@ -5,6 +5,7 @@ extends: 'eslint:recommended'
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
+  it: readonly
 parser: babel-eslint
 parserOptions:
   ecmaFeatures:
@@ -17,4 +18,5 @@ rules:
   no-console: warn
   no-unused-vars:
     - error
-    - varsIgnorePattern: "React"
+    - varsIgnorePattern: "(React*|App)"
+
