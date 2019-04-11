@@ -1,8 +1,32 @@
-const feathers = require ('@feathersjs/feathers');
-const express = require ('@feathersjs/express');
-const recipes = require( './recipes');
+const config = require('./config/config');
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise; // required for feathers-mongoose
+const service = require('feathers-mongoose');
 
-const port = 3030;
+// models
+const Recipe = require('./models/Recipe');
+const port = config.port;
+
+async function initMongoose() {
+    if (config.environment === 'test') {
+        await config.mongo.init();
+    }
+    mongoose.connect(config.mongo.connectString, { useNewUrlParser: true })
+        .then(() => { /* do nothing */ })
+        .catch((err) => {
+            console.error(`connection: error: ${err}`);
+        });
+    const db = mongoose.connection;
+    db.once('open', () => {
+        console.info('MongoDB connected.');
+        let r = new Recipe({ title: 'Test Recipe' });
+        r.save();
+    });
+}
+initMongoose();
+
 
 const app = express(feathers());
 
@@ -16,17 +40,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.configure(express.rest());
 
-app.use('recipes', recipes);
+app.use('recipes', service({ Model: Recipe }));
 
 app.use(express.errorHandler());
 
 const server = app.listen(port);
 
-app.service('recipes').create({
-    title: 'Test Recipe',
-    ingredients: [ '1 tsp Salt' ],
-    steps: [ 'Add the salt.' ]
-});
-
 server.on('listening', () => console.log(`REST API started at http://localhost:${port}`));
 
+module.exports = app;
