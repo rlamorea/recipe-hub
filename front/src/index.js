@@ -1,7 +1,10 @@
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "(React|App)" }] */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import 'react-mdl/extra/material.css';
+import 'react-mdl/extra/material';
+//import './index-old.css';
+import './styles.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
