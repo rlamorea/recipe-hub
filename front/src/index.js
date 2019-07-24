@@ -3,8 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'react-mdl/extra/css/material.light_blue-indigo.min.css';
 import 'react-mdl/extra/material';
-//import './index-old.css';
-import './lsg/src/assets/toolkit/styles/styles.css';
+import './styles/toolkit.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
