@@ -1,0 +1,21 @@
+#root { margin-top: 1em; }
+
+.color-span {
+    min-width: 6em;
+    padding: 0.2em 1em;
+    margin: 0.2em 0.2em 1em;
+    text-align: center;
+    font-size: 1.5em;
+    color: black;
+    border: solid 1px black;
+}
+.color-span.dark {
+    color: white;
+    border-color: lightgray;
+}
+.color-span.text {
+    background-color: white;
+}
+.color-span.text.dark {
+    background-color: black;
+}
