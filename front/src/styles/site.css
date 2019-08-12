@@ -4,7 +4,7 @@
     position: relative;
 }
 .wait-overlay-container.is-waiting {
-    opacity: 0.30;
+    opacity: 0.50;
 }
 .wait-overlay {
     position: absolute;
@@ -13,7 +13,7 @@
     width: 100%;
     height: 100%;
     z-index: 1000;
-    background: rgba(0,0,0,0.15);
+    background: transparent;
     display:none;
 }
 .wait-overlay.is-waiting {
