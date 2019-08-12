@@ -1,0 +1,28 @@
+/* wait */
+
+.wait-overlay-container {
+    position: relative;
+}
+.wait-overlay-container.is-waiting {
+    opacity: 0.30;
+}
+.wait-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background: rgba(0,0,0,0.15);
+    display:none;
+}
+.wait-overlay.is-waiting {
+    display: block;
+}
+.wait-overlay .wait-overlay-spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -14px;
+    margin-top: -14px;
+}
