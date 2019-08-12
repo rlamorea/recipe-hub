@@ -3,35 +3,104 @@ import '../styles/fonts.css';
 import 'react-mdl/extra/css/material.light_blue-indigo.min.css';
 import 'react-mdl/extra/material';
 import '../styles/toolkit.css';
+import '../styles/site.css';
 import './storybook-containers.css';
 
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import {action} from "@storybook/addon-actions";
 // import { linkTo } from '@storybook/addon-links';
+import { withKnobs, text, boolean, select, number } from '@storybook/addon-knobs';
 
+import { Button, FabButton } from '../components/button';
+import { Spinner, WaitOverlayContainer } from '../components/spinner';
 
-const colorStories = storiesOf('Color', module)
-    .addDecorator(withInfo);
+class ColorWrapper extends React.Component {
+    componentDidUpdate() {
+        window.componentHandler.upgradeAllRegistered();
+    }
+    render() {
+        return(
+            <span
+                className={`color-span ${this.props.colorClass}`}
+            >
+                {this.props.text || 'Color'}
+            </span>
+        );
+    }
+}
 
-[   { cl: 'Default Background', useCl: ' ', notes: 'no class needed' },
-    'mdl-color--primary', { cl: 'mdl-color--primary-contrast', ex: 'dark' }, 'mdl-color--primary-dark',
-    'mdl-color--accent', 'mdl-color--accent-contrast',
-    { cl: 'Default Text', useCl: ' ', notes: 'no class needed' },
-    'mdl-color-text--primary', 'mdl-color-text--primary-contrast', 'mdl-color-text--primary-dark',
-    'mdl-color-text--accent', { cl: 'mdl-color-text--accent-contrast', ex: 'dark' }
-].forEach((colorClass) => {
-    if (typeof colorClass === 'string') { colorClass = { cl: colorClass }; }
-    const notes = (colorClass.notes || '');
-    const extraClass = (colorClass.ex || '') + (colorClass.cl.indexOf('text') >= 0 ? ' text' : '');
-    const fullClass = ('color-span ' + (extraClass)+ ' ' + (colorClass.useCl || colorClass.cl)).trim().replace(/ +/, ' ');
-    colorStories.add(colorClass.cl, () => <span className={fullClass}>{colorClass.cl}</span>, { info: { text: notes } });
-});
+storiesOf('Color', module)
+    .addDecorator(withInfo)
+    .addDecorator(withKnobs)
+    .add('Background', () => <ColorWrapper
+            colorClass={select('Color', {
+                "default": '',
+                "Primary": 'mdl-color--primary',
+                "Primary Contrast": 'mdl-color--primary-contrast dark',
+                "Primary Dark" : 'mdl-color--primary-dark',
+                "Accent": 'mdl-color--accent',
+                "Accent Contrast" : 'mdl-color--accent-contrast'
+            }, 'default')}
+            text="Background Color"
+        />
+    )
+    .add('Text', () => <ColorWrapper
+            colorClass={`text ${select('Color', {
+                "default": '',
+                "Primary": 'mdl-color-text--primary',
+                "Primary Contrast": 'mdl-color-text--primary-contrast',
+                "Primary Dark" : 'mdl-color-text--primary-dark',
+                "Accent": 'mdl-color-text--accent',
+                "Accent Contrast" : 'mdl-color-text--accent-contrast dark'
+            }, 'default')}`}
+            text="Text Color"
+        />
+    );
 
-storiesOf('Button', module)
-    .add('add fab', () => <button
-        onClick={action('clicked')}
-        className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored"
-    >
-        <i className="material-icons">add</i>
-    </button>);
+const buttonStories = storiesOf('Button', module);
+buttonStories
+    .addDecorator(withInfo)
+    .addDecorator(withKnobs)
+    .addDecorator(storyFn => <div className="button-container">{storyFn()}</div>)
+    .add('fab', () => <FabButton
+            onClick={action('clicked')}
+            color={select('Color', [ 'primary', 'accent', 'default' ], 'default')}
+            disabled={boolean('Disabled', false)}
+            ripple={boolean('Ripple Effect', false)}
+            icon={select('Icon', ['(none)','add','clear','create','mail','redo','remove','reply','reply_all','save_alt','send','undo'], 'add')}
+        />
+    )
+    .add('raised', () => <Button
+            onClick={action('clicked')}
+            color={select('Color', [ 'primary', 'accent', 'default' ], 'default')}
+            disabled={boolean('Disabled', false)}
+            ripple={boolean('Ripple Effect', false)}
+            icon={select('Icon', ['(none)','add','clear','create','mail','redo','remove','reply','reply_all','save_alt','send','undo'], 'add')}
+            text={text('Label', 'Button')}
+        />
+    );
+
+const spinnerStories = storiesOf('Progress', module);
+spinnerStories
+    .addDecorator(withInfo)
+    .addDecorator(withKnobs)
+    .addDecorator(storyFn => <div className="button-container">{storyFn()}</div>)
+    .add('spinner', () => <Spinner
+            active={boolean('Active', true)}
+            singleColor={boolean('Single Color', false)}
+        />
+    )
+    .add('wait-overlay', () => {
+        const WOC = WaitOverlayContainer(() => (
+            <div>
+                <p>Some overlaid content and a</p>
+                <Button color="primary" text="Button" onClick={action('button clicked')}/>
+            </div>
+        ));
+        return(<WOC
+                waiting={boolean('waiting', true)}
+                singleColor={boolean('Single Color', false)}
+            />
+        );
+    });

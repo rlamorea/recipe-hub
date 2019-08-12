@@ -19,3 +19,15 @@
 .color-span.text.dark {
     background-color: black;
 }
+
+.button-container {
+    margin: 0.5em 0.5em 1em;
+}
+
+.wait-overlay-container {
+    margin: 0.5em 0.5em 1em;
+    width: 20em;
+    minimum-height: 5em;
+    border: solid 1px lightgray;
+    padding: 0.25em;
+}
