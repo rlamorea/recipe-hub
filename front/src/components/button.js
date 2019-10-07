@@ -23,7 +23,7 @@ class Button extends React.Component {
             <button
                 ref={node => { this.root = node; }}
                 onClick={this.handleClick}
-                className={`${this.baseClass} ${this.colorMap[this.props.color] || ''} ${this.props.ripple ? 'mdl-js-ripple-effect' : ''}`}
+                className={`${this.baseClass} ${this.props.className || ''} ${this.colorMap[this.props.color] || ''} ${this.props.ripple ? 'mdl-js-ripple-effect' : ''}`}
                 disabled={this.props.disabled}
             >
                 {this.props.icon && this.props.icon !== '(none)' &&

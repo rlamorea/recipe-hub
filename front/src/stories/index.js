@@ -92,15 +92,15 @@ spinnerStories
         />
     )
     .add('wait-overlay', () => {
-        const WOC = WaitOverlayContainer(() => (
-            <div>
-                <p>Some overlaid content and a</p>
-                <Button color="primary" text="Button" onClick={action('button clicked')}/>
-            </div>
-        ));
-        return(<WOC
-                waiting={boolean('waiting', true)}
+        return(
+            <WaitOverlayContainer
+                waiting={boolean('waiting', false)}
                 singleColor={boolean('Single Color', false)}
-            />
+            >
+                <div>
+                    <p>Some overlaid content and a</p>
+                    <Button className="wait-on-click" color="primary" text="Button" onClick={action('button clicked')}/>
+                </div>
+            </WaitOverlayContainer>
         );
     });
