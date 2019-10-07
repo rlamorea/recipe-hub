@@ -10,9 +10,9 @@
         "eslint-plugin-jest": "^22.4.1",
         "feathers-mongoose": "^7.3.2",
         "init": "^0.1.2",
-        "lodash": "^4.17.11",
+        "lodash": "^4.17.15",
         "mongoose": "^5.5.0",
-        "npm": "^6.9.0"
+        "npm": "^6.11.3"
     },
     "devDependencies": {
         "babel-eslint": "^10.0.1",
