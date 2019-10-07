@@ -29,7 +29,6 @@ class WaitOverlay extends React.Component {
     }
     componentDidMount() {
         window.componentHandler.upgradeElement(this.root);
-        this.root.parentElement
 
         this.setState({
             containerId: ReactDOM.findDOMNode(this).parentNode.getAttribute("id")
@@ -50,18 +49,32 @@ class WaitOverlay extends React.Component {
     }
 }
 
-const WaitOverlayContainer = (WrappedComponent) => {
-    return class extends React.Component {
-        render() {
-            return(
-                <div
-                    className={`wait-overlay-container ${this.props.waiting ? 'is-waiting' : ''} ${this.props.extraClass || ''}`}
-                >
-                    <WaitOverlay waiting={this.props.waiting} singleColor={this.props.singleColor}/>
-                    <WrappedComponent/>
-                </div>
-            )
+class WaitOverlayContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { waiting: (props.waiting === true) };
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick(event) {
+        if (event.target.className.indexOf('wait-on-click') >= 0) {
+            this.setState({ waiting: true });
         }
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.waiting != this.state.waiting) {
+            this.setState({ waiting: nextProps.waiting });
+        }
+    }
+    render() {
+        return(
+            <div
+                className={`wait-overlay-container ${this.state.waiting ? 'is-waiting' : ''} ${this.props.extraClass || ''}`}
+                onClick={this.handleClick}
+            >
+                <WaitOverlay waiting={this.state.waiting} singleColor={this.props.singleColor}/>
+                {this.props.children}
+            </div>
+        )
     }
 }
 
