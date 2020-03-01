@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { WaitOverlayContainer } from '../components/spinner';
 import React from 'react';
 import { mount } from 'enzyme';
@@ -29,7 +30,7 @@ test('WaitOverlayContainer is waiting by setting property', async () => {
         </WaitOverlayContainer>;
     const wrapper = mount( woc );
     const clk = wrapper.find('.wait-on-click');
-    clk.simulate('click')
+    clk.simulate('click');
     const overlay = wrapper.find('.wait-overlay-container');
     expect(overlay.hasClass('is-waiting')).toBe(true);
 });

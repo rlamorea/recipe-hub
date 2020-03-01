@@ -1,6 +1,10 @@
 const app = require('../app');
 let request = require('supertest');
 
+afterAll(async () => {
+    await app.shutdown();
+});
+
 describe('Recipe Service Tests', () => {
     let rid = null;
 

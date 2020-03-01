@@ -60,10 +60,11 @@ class WaitOverlayContainer extends React.Component {
             this.setState({ waiting: true });
         }
     }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.waiting != this.state.waiting) {
-            this.setState({ waiting: nextProps.waiting });
+    static getDerivedStateFromProps(props, state) {
+        if (props.waiting !== undefined && props.waiting !== state.waiting) {
+            return { waiting: props.waiting };
         }
+        return null;
     }
     render() {
         return(

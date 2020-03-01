@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 beforeAll(async () => {
     await config.mongo.init();
-    await mongoose.connect(config.mongo.connectString, { useNewUrlParser: true });
+    await mongoose.connect(config.mongo.connectString, { useUnifiedTopology: true, useNewUrlParser: true });
 });
 
 afterAll(async () => {
