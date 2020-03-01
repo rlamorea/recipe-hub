@@ -13,7 +13,7 @@ async function initMongoose() {
     if (config.environment === 'test') {
         await config.mongo.init();
     }
-    mongoose.connect(config.mongo.connectString, { useNewUrlParser: true })
+    mongoose.connect(config.mongo.connectString, { useUnifiedTopology: true, useNewUrlParser: true })
         .then(() => { /* do nothing */ })
         .catch((err) => {
             console.error(`connection: error: ${err}`);
@@ -47,5 +47,23 @@ app.use(express.errorHandler());
 const server = app.listen(port);
 
 server.on('listening', () => console.log(`REST API started at http://localhost:${port}`));
+
+process.on('SIGTERM', async () => {
+    console.info('SIGTERM signal received.');
+    await app.shutdown();
+});
+process.on('SIGINT', async () => {
+    console.info('SIGINT signal received.');
+    await app.shutdown();
+});
+
+app.shutdown = async () => {
+    console.log('REST API shutting down.');
+    server.close();
+    mongoose.disconnect().then( () => { /* do nothing */ });
+    if (config.environment === 'test') {
+        await config.mongo.close();
+    }
+};
 
 module.exports = app;

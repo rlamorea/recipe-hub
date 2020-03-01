@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@frctl/fractal": "^1.2.0",
-    "axios": "^0.18.0",
-    "react": "^16.8.5",
-    "react-dom": "^16.8.5",
-    "react-mdl": "^1.11.0",
-    "react-scripts": "2.1.8"
+    "@frctl/fractal": "^1.2.1",
+    "axios": "^0.19.2",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-mdl": "^2.1.0",
+    "react-scripts": "^3.4.0",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,17 +30,20 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@storybook/addon-actions": "^5.2.1",
-    "@storybook/addon-info": "^5.2.1",
-    "@storybook/addon-knobs": "^5.2.1",
-    "@storybook/addon-links": "^5.2.1",
-    "@storybook/addon-viewport": "^5.2.1",
-    "@storybook/addons": "^5.2.1",
-    "@storybook/react": "^5.2.1",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
+    "@storybook/addon-actions": "^5.3.14",
+    "@storybook/addon-info": "^5.3.14",
+    "@storybook/addon-knobs": "^5.3.14",
+    "@storybook/addon-links": "^5.3.14",
+    "@storybook/addon-viewport": "^5.3.14",
+    "@storybook/addons": "^5.3.14",
+    "@storybook/preset-create-react-app": "^1.5.2",
+    "@storybook/react": "^5.3.14",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-wait": "^1.0.9",
-    "eslint": "5.12.0",
-    "eslint-plugin-react": "^7.12.4"
+    "eslint": "^6.8.0",
+    "eslint-plugin-flowtype": "^3.13.0",
+    "eslint-plugin-jest": "^23.8.1",
+    "eslint-plugin-react": "^7.18.3"
   }
 }

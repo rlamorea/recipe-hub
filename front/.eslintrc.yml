@@ -1,6 +1,7 @@
 env:
   browser: true
   es6: true
+  jest/globals: true
 extends: 'eslint:recommended'
 globals:
   Atomics: readonly
@@ -14,6 +15,7 @@ parserOptions:
   sourceType: module
 plugins:
   - react
+  - jest
 rules:
   no-console: warn
   no-unused-vars:
